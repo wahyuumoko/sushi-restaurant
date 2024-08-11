@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
 import 'package:myapp/components/food_tile.dart';
 import 'package:myapp/models/food.dart';
+import 'package:myapp/pages/food_detail_page.dart';
 import 'package:myapp/theme/colors.dart';
 
 class MenuPage extends StatefulWidget {
@@ -31,6 +33,11 @@ class _MenuPageState extends State<MenuPage> {
       rating: "4,7",
     ),
   ];
+
+  // navigate to food item details page
+  void navigateToFoodDetails(int index) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailPage  ()),);  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +115,8 @@ class _MenuPageState extends State<MenuPage> {
                   borderSide: BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(20),
                 ),
+                hintText: "Search Here..."
+
               ),
             ),
           ),
@@ -131,14 +140,69 @@ class _MenuPageState extends State<MenuPage> {
 
           Expanded(
             child: ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
                 food: foodMenu[index],
+                onTap: () => navigateToFoodDetails(index),
               ),
             ),
           ),
 
+          const SizedBox(height: 25),
+
           // popular food
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    // image
+                    Image.asset(
+                      'lib/images/salmon_eggs.png',
+                      height: 60,
+                    ),
+
+                    // name price
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // name
+                        Text(
+                          " Salmon Eggs",
+                          style: GoogleFonts.dmSerifDisplay(fontSize: 18),
+                        ),
+
+                        const SizedBox(width: 20),
+
+                        // price
+                        Text(
+                          '\$ 12.00',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+
+                //hearth
+                const Icon(
+                  Icons.favorite_outline,
+                  color: Colors.grey,
+                  size: 28,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
