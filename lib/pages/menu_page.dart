@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
+import 'package:myapp/components/food_tile.dart';
+import 'package:myapp/models/food.dart';
 import 'package:myapp/theme/colors.dart';
 
 class MenuPage extends StatefulWidget {
@@ -11,6 +13,25 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  // food menu
+  List foodMenu = [
+    //salmon sushi
+    Food(
+      name: "Salmon Sushi",
+      price: "21.00",
+      imagePath: "lib/images/salmon_sushi.png",
+      rating: "4,9",
+    ),
+
+    //tuna
+    Food(
+      name: "Tuna",
+      price: "18.00",
+      imagePath: "lib/images/tuna.png",
+      rating: "4,7",
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +49,7 @@ class _MenuPageState extends State<MenuPage> {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // promo banner
           Container(
@@ -70,7 +92,7 @@ class _MenuPageState extends State<MenuPage> {
               ],
             ),
           ),
-          
+
           const SizedBox(height: 25),
 
           //search bar
@@ -78,11 +100,43 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder()),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
           ),
+
+          const SizedBox(height: 25),
+
           // menu list
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              "Food Menu",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.grey[800],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: foodMenu.length,
+              itemBuilder: (context, index) => FoodTile(
+                food: foodMenu[index],
+              ),
+            ),
+          ),
 
           // popular food
         ],
