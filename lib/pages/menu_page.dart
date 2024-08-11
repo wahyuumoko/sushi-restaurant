@@ -7,6 +7,8 @@ import 'package:myapp/models/food.dart';
 import 'package:myapp/pages/food_detail_page.dart';
 import 'package:myapp/theme/colors.dart';
 
+ //menit 21:24 https://www.youtube.com/watch?v=zOQzu3BGSqo
+
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
