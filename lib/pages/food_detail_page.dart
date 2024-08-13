@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/models/food.dart';
 import 'package:myapp/theme/colors.dart';
 
+// menit 25:44 https://www.youtube.com/watch?v=zOQzu3BGSqo
+
 class FoodDetailPage extends StatefulWidget {
   final Food food;
   const FoodDetailPage({required this.food, super.key});
