@@ -7,8 +7,6 @@ import 'package:myapp/models/food.dart';
 import 'package:myapp/pages/food_detail_page.dart';
 import 'package:myapp/theme/colors.dart';
 
- //menit 21:24 https://www.youtube.com/watch?v=zOQzu3BGSqo
-
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
@@ -38,7 +36,14 @@ class _MenuPageState extends State<MenuPage> {
 
   // navigate to food item details page
   void navigateToFoodDetails(int index) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailPage  ()),);  
+    Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => FoodDetailPage(
+          food: foodMenu[index],
+        ),
+      ),
+    );  
   }
 
   @override
