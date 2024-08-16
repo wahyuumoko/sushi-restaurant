@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/models/food.dart';
 import 'package:myapp/theme/colors.dart';
 
-// menit 25:44 https://www.youtube.com/watch?v=zOQzu3BGSqo
+// menit 27:16 https://www.youtube.com/watch?v=zOQzu3BGSqo
 
 class FoodDetailPage extends StatefulWidget {
   final Food food;
@@ -14,6 +14,25 @@ class FoodDetailPage extends StatefulWidget {
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
+  // quantity
+  int quantityCount = 0;
+
+  // decrement quantity
+  void decrementQuantity() {
+    setState(() {
+      quantityCount--;
+    });
+  }
+
+  // increment quantity
+  void incrementQuantity() {
+    setState(() {
+      setState(() {
+        quantityCount++;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,9 +131,29 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                         fontSize: 18,
                       ),
                     ),
+
                     //quantity
+                    Row(
+                      children: [
+                        // minus btn
+                        Container(
+                          decoration: BoxDecoration(color: secondaryColor),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.remove,
+                              color: Colors.white,
+                            ),
+                            onPressed: decrementQuantity,
+                          ),
+                        ),
+                        // quantity count
+
+                        // plus btn
+                      ],
+                    ),
                   ],
                 ),
+
                 // add to cart btn
               ],
             ),
