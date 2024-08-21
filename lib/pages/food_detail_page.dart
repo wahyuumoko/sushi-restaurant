@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/components/button.dart';
 import 'package:myapp/models/food.dart';
 import 'package:myapp/theme/colors.dart';
 
@@ -32,6 +33,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       });
     });
   }
+
+  // add to cart
+  void addToCart() {}
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +125,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               children: [
                 // price quantity
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // price
                     Text(
-                      "\$" + widget.food.price,
-                      style: TextStyle(
+                      "\$${widget.food.price}",
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -137,24 +142,57 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       children: [
                         // minus btn
                         Container(
-                          decoration: BoxDecoration(color: secondaryColor),
+                          decoration: BoxDecoration(
+                            color: secondaryColor,
+                            shape: BoxShape.circle,
+                          ),
                           child: IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove,
                               color: Colors.white,
                             ),
                             onPressed: decrementQuantity,
                           ),
                         ),
+
                         // quantity count
+                        SizedBox(
+                          width: 40,
+                          child: Center(
+                            child: Text(
+                              quantityCount.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
 
                         // plus btn
+                        Container(
+                          decoration: BoxDecoration(
+                            color: secondaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                            onPressed: incrementQuantity,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
 
+                const SizedBox(height: 25),
+
                 // add to cart btn
+                MyButton(text: "Add to cart", onTap: addToCart)
               ],
             ),
           ),
