@@ -4,8 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
 import 'package:myapp/components/food_tile.dart';
 import 'package:myapp/models/food.dart';
+import 'package:myapp/models/shop.dart';
 import 'package:myapp/pages/food_detail_page.dart';
 import 'package:myapp/theme/colors.dart';
+import 'package:provider/provider.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -15,39 +17,28 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  // food menu
-  List foodMenu = [
-    //salmon sushi
-    Food(
-      name: "Salmon Sushi",
-      price: "21.00",
-      imagePath: "lib/images/salmon_sushi.png",
-      rating: "4,9",
-    ),
-
-    //tuna
-    Food(
-      name: "Tuna",
-      price: "18.00",
-      imagePath: "lib/images/tuna.png",
-      rating: "4,7",
-    ),
-  ];
-
   // navigate to food item details page
   void navigateToFoodDetails(int index) {
+    // get the shop and its menu
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     Navigator.push(
-      context, 
+      context,
       MaterialPageRoute(
         builder: (context) => FoodDetailPage(
           food: foodMenu[index],
         ),
       ),
-    );  
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    // get the shop and its menu
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -114,17 +105,15 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                hintText: "Search Here..."
-
-              ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  hintText: "Search Here..."),
             ),
           ),
 

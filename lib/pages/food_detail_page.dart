@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
 import 'package:myapp/models/food.dart';
+import 'package:myapp/models/shop.dart';
 import 'package:myapp/theme/colors.dart';
+import 'package:provider/provider.dart';
 
 // menit 27:16 https://www.youtube.com/watch?v=zOQzu3BGSqo
 
@@ -21,7 +23,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   // decrement quantity
   void decrementQuantity() {
     setState(() {
-      quantityCount--;
+      if (quantityCount > 0) {
+        quantityCount--;
+      }
     });
   }
 
@@ -35,7 +39,36 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   }
 
   // add to cart
-  void addToCart() {}
+  void addToCart() {
+    // only add to cart if there is something in the cart
+    if (quantityCount > 0) {
+      // get access to shop
+      final shop = context.read<Shop>();
+
+      // add to cart
+      shop.addToCart(widget.food, quantityCount);
+
+      // let the user know it was successful
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: const Text("Successfully added to cart"),
+          actions: [
+            // ok button
+            IconButton(
+              onPressed: () {
+                // pop once to remove the dialog box
+                Navigator.pop(context);
+                // pop again to go to the previous screen
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.done),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +76,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3305623129.
         foregroundColor: Colors.grey[900],
       ),
       body: Column(
         children: [
-          // listview of food details
+          // list view of food details
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),

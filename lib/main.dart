@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:myapp/models/shop.dart';
 import 'package:myapp/pages/menu_page.dart';
 import 'pages/intro_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Shop(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,8 +23,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const IntroPage(),
       routes: {
-        '/intropage': (context) => IntroPage(),
-        '/menupage': (context) => MenuPage(),
+        '/intropage': (context) => const IntroPage(),
+        '/menupage': (context) => const MenuPage(),
       },
     );
   }
