@@ -6,7 +6,7 @@ import 'package:myapp/models/shop.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:provider/provider.dart';
 
-// menit 27:16 https://www.youtube.com/watch?v=zOQzu3BGSqo
+// menit 33:49 https://www.youtube.com/watch?v=zOQzu3BGSqo
 
 class FoodDetailPage extends StatefulWidget {
   final Food food;
