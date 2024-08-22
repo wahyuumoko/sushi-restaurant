@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
 import 'package:myapp/models/food.dart';
 import 'package:myapp/models/shop.dart';
 import 'package:myapp/theme/colors.dart';
 import 'package:provider/provider.dart';
-
 
 class FoodDetailPage extends StatefulWidget {
   final Food food;
@@ -50,18 +50,28 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       // let the user know it was successful
       showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) => AlertDialog(
-          content: const Text("Successfully added to cart"),
+          backgroundColor: primaryColor,
+          content: const Text(
+            "Successfully added to cart",
+            style: TextStyle(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
           actions: [
             // ok button
             IconButton(
               onPressed: () {
                 // pop once to remove the dialog box
                 Navigator.pop(context);
+
                 // pop again to go to the previous screen
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.done),
+              icon: const Icon(
+                Icons.done,
+                color: Colors.white,
+              ),
             ),
           ],
         ),

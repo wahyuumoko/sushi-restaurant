@@ -38,20 +38,25 @@ class _MenuPageState extends State<MenuPage> {
     // get the shop and its menu
     final shop = context.read<Shop>();
     final foodMenu = shop.foodMenu;
-    
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3607984556.
+        foregroundColor: Colors.grey[800],
         elevation: 0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.grey[900],
-        ),
-        title: Text(
-          'Tokyo',
-          style: TextStyle(color: Colors.grey[900]),
-        ),
+        leading: const Icon(Icons.menu),
+        title: const Text('Tokyo'),
+        actions: [
+          // cart btn
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cartpage');
+            },
+            icon: const Icon(Icons.shopping_cart),
+          )
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
