@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/components/button.dart';
 import 'package:myapp/components/food_tile.dart';
-import 'package:myapp/models/food.dart';
 import 'package:myapp/models/shop.dart';
 import 'package:myapp/pages/food_detail_page.dart';
 import 'package:myapp/theme/colors.dart';
